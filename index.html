@@ -23,7 +23,7 @@
       function send() {
         var user = input.value.toLowerCase();
         input.value = "";
-
+        chat.innerHTML += `<div id="typing">mengetik...</div>`;
         histori.push({ role: "user", content: user });
         fetch("https://rendimarzikri-llm-backend.vercel.app/", {
           method: "POST",
@@ -32,6 +32,7 @@
         })
         .then(res => res.json())
         .then(data => {
+          document.getElementById("typing").remove():
           chat.innerHTML = data.response;
           histori.push({ role: "assistan", content: data.response });
         });
