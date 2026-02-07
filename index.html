@@ -15,6 +15,12 @@
       function send() {
         var user = input.value.toLowerCase();
         input.value = "";
+
+        let response = "Not response...";
+        if (user.includes("halo")) {
+          response = "Halo juga!";
+        }
+        chat.innerHTML = response;
       }
     </script>
   </body>
