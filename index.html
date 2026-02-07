@@ -19,23 +19,16 @@
       user: siapa kamu
       AI: aku adalah AI buatan febridayani
       `;
+
+      let response = "not response";
       let histori = [{ role: "system", content: database_latihan }];
       function send() {
         var user = input.value.toLowerCase();
         input.value = "";
-        chat.innerHTML += `<div id="typing">mengetik...</div>`;
-        histori.push({ role: "user", content: user });
-        fetch("https://rendimarzikri-llm-backend.vercel.app/", {
-          method: "POST",
-          headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ message: histori })
-        })
-        .then(res => res.json())
-        .then(data => {
-          document.getElementById("typing").remove():
-          chat.innerHTML = data.response;
-          histori.push({ role: "assistan", content: data.response });
-        });
+        if (user.includes("halo")) {
+          response = "halo juga";
+        }
+        chat.innerHTML = response;
       }
     </script>
   </body>
