@@ -12,15 +12,29 @@
     <input id="input" placeholder="Ketik sesuatu...">
     <button onclick="send()">kirim</button>
     <script>
+      let database_latihan = `
+      user: halo
+      AI: halo juga
+
+      user: siapa kamu
+      AI: aku adalah AI buatan febridayani
+      `;
+      let histori = [{ role: "system", content: database_latihan }];
       function send() {
         var user = input.value.toLowerCase();
         input.value = "";
 
-        let response = "Not response...";
-        if (user.includes("halo")) {
-          response = "Halo juga!";
-        }
-        chat.innerHTML = response;
+        histori.push({ role: "user", content: user });
+        fetch("https://rendimarzikri-llm-backend.vercel.app/", {
+          method: "POST",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({ message: histori })
+        })
+        .then(res => res.json())
+        .then(data => {
+          chat.innerHTML = data.response;
+          histori.push({ role: "assistan", content: data.response });
+        });
       }
     </script>
   </body>
